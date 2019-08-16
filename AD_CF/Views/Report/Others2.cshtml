@@ -1,15 +1,12 @@
-﻿@model AD_CF.Models.ItemQuantity
+﻿@using AD_CF.Models
 
 @{
 
     string sessionId = (string)ViewData["sessionId"];
     Layout = null;
     ViewBag.Title = "LogicSSIS - Create PO";
-    List<String> itemName = Model.itemName;
-    List<int> itemQty = Model.itemQty;
     List<double> total = (List<double>)ViewData["total"];
     List<string> department = (List<string>)ViewData["department"];
-    int size = Model.itemName.Count();
 
 }
 
@@ -196,27 +193,27 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="table-responsive">
-                                        <table class="table" id="table1">
-
+                                        <table class="table" id="table2">
                                             <tr>
-                                                <td>ItemNumber</td>
-                                                <td>ItemQty</td>
+                                                <td>department</td>
+                                                <td>totalprice</td>
+
                                             </tr>
-                                            @for (int i = 0; i < size; i++)
+                                            @for (int i = 0; i < department.Count; i++)
                                             {
                                                 <tr>
-                                                    <td>@itemName[i]</td>
-                                                    <td>@itemQty[i]</td>
+                                                    <td>@department[i]</td>
+                                                    <td>@total[i]</td>
+
                                                 </tr>
                                             }
 
                                         </table><!--/.table-->
 
-                                        <button id="btnExport" class="btn btn-primary" onclick="javascript:HtmlExportToExcel('table1')">
+                                        <button id="btnExport" class="btn btn-primary" onclick="javascript:HtmlExportToExcel('table2')">
                                             print
                                         </button>
                                         <a id="dlink" style="display: none;"></a>
-
                                     </div>
                                 </div>
                             </div>
@@ -224,8 +221,10 @@
 
                     </div><!-- Row -->
                 </div><!-- Main Wrapper -->
+                <div class="page-footer">
+                    <p>SA48 Team 10</p>
+                </div>
             </div><!-- /Page Inner -->
-
 
 
         </div><!-- /Page Content -->

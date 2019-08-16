@@ -18,6 +18,8 @@ namespace AD_CF.Models
         public DateTime datecreated { get; set; }
        
         public DateTime? dateapproved { get; set; }
+
+        public DateTime? datecompleted { get; set; }
         public string comment { get; set; }
         public string department { get; set; }
 
