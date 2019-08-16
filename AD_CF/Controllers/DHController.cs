@@ -158,7 +158,6 @@ namespace AD_CF.Controllers
                         requistion.approvedBy = emp;
                         EmailServices.sendEmail(requistion.Employee.Email, cmd, requistion.reqformNumber);
 
-
                     }
                     else if (cmd == "Reject")
                     {

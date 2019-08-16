@@ -42,12 +42,21 @@ namespace AD_CF.Controllers
                         User user1 = db.users.Where(x => x.userName == userName).FirstOrDefault();
                         user1.sessionId = sessionId;
                         db.SaveChanges();
+                        Utilities.util.ValidateDelegateStatus(sessionId);
                     }                   
 
                     using (var db = new InventoryDbContext())
                     {
                         User user1 = db.users.Where(x => x.userName == userName).FirstOrDefault();
-                        if(user1.employee.role == "depthead")
+                        List<Delegation> delegations = db.delegations.Where(x => x.employee.id == user1.employeeId).ToList();
+                        if (delegations.Any(x => x.startDate <= DateTime.Now && x.endDate >= DateTime.Now))
+                        {
+                            if (delegations.Any(x => x.employeeId == user1.employeeId) && user1.employee.role == "deptstaff")
+                            {
+                                return RedirectToAction("DBDeptHead", "Dashboard", new { sessionId });
+                            }
+                        }
+                        if (user1.employee.role == "depthead")
                         {
                             return RedirectToAction("DBDeptHead", "Dashboard", new { sessionId });
                         }
