@@ -4,11 +4,12 @@
 
     string sessionId = (string)ViewData["sessionId"];
     Layout = null;
-    ViewBag.Title = "LogicSSIS - Create PO";
+    ViewBag.Title = "LogicSSIS - Report";
     List<String> itemName = Model.itemName;
     List<int> itemQty = Model.itemQty;
     List<double> total = (List<double>)ViewData["total"];
     List<string> department = (List<string>)ViewData["department"];
+    string employeeName = (string)ViewData["staffname"];
     int size = Model.itemName.Count();
 
 }
@@ -53,7 +54,7 @@
         <!-- Page Sidebar -->
         <div class="page-sidebar">
             <a class="logo-box" href="">
-                Logic<span>SSIS</span>
+                <img src="~/assets/images/LogoL.jpeg" height="40" width="40" /> <span style="color:#737373; font-family: Arial; font-size: large; text-transform:none">LogicSSIS</span>
 
                 <i class="icon-close" id="sidebar-toggle-button-close"></i>
             </a>
@@ -70,15 +71,15 @@
                                 <i class="menu-icon fa fa-archive"></i><span>Inventory</span><i class="accordion-icon fa fa-angle-left"></i>
                             </a>
                             <ul class="sub-menu">
-                                <li class="active-page"><a href="~/Store/ViewRequest">Retrieval</a></li>
-                                <li><a href="~/Store/Disbursement">Disbursement</a></li>
-                                <li><a href="~/Store/viewStockList">Stocklist</a></li>
+                                <li><a href="~/Store/Requisitions?sessionId=@sessionId">Retrieval</a></li>
+                                <li><a href="~/Store/Disbursement?sessionId=@sessionId">Disbursement</a></li>
+                                <li><a href="~/Store/StockList?sessionId=@sessionId">Stocklist</a></li>
 
                             </ul>
                         </li>
 
                         <li>
-                            <a href="">
+                            <a href="~/Purchase/CreatePurchase?sessionId=@sessionId">
                                 <i class="menu-icon fa fa-shopping-cart"></i><span>Purchase Order</span>
                             </a>
                         </li>
@@ -87,9 +88,9 @@
                                 <i class="menu-icon fa fa-list-alt"></i><span>Stock Adjustment</span><i class="accordion-icon fa fa-angle-left"></i>
                             </a>
                             <ul class="sub-menu">
-                                <li><a href="~/StockAdjm/issueVoucher">Issue Voucher</a></li>
-                                <li><a href="~/StockAdjm/ApproveVoucher">Approve Voucher</a></li>
-                                <li class=""><a href="~/StockAdjm/viewVouchers">View Voucher History</a></li>
+                                <li><a href="~/StockAdjm/IssueVoucher?sessionId=@sessionId">Issue Voucher</a></li>
+                                <li><a href="~/StockAdjm/ApproveVoucher?sessionId=@sessionId">Approve Voucher</a></li>
+                                <li class=""><a href="~/StockAdjm/VoucherHistoryMgr?sessionId=@sessionId">View Voucher History</a></li>
                             </ul>
                         </li>
                         <li class="">
@@ -97,9 +98,9 @@
                                 <i class="menu-icon fa fa-list"></i><span>Master Table</span><i class="accordion-icon fa fa-angle-left"></i>
                             </a>
                             <ul class="sub-menu">
-                                <li><a href="~/master/SupplierList">Supplier List</a></li>
-                                <li class=""><a href="~/master/DeptList">Department List</a></li>
-                                <li><a href="~/master/Catalogue">Catalogue</a></li>
+                                <li><a href="~/master/SupplierList?sessionId=@sessionId">Supplier List</a></li>
+                                <li class=""><a href="~/master/DeptList?sessionId=@sessionId">Department List</a></li>
+                                <li><a href="~/master/Catalogue?sessionId=@sessionId">Catalogue</a></li>
                             </ul>
                         </li>
                         <li class="active-page">
@@ -107,8 +108,8 @@
                                 <i class="menu-icon fa fa-line-chart"></i><span>Report</span><i class="accordion-icon fa fa-angle-left"></i>
                             </a>
                             <ul class="sub-menu">
-                                <li class=""><a href="">Trend Chart</a></li>
-                                <li class="active-page"><a href="">Others</a></li>
+                                <li class="active-page"><a href="/Report/Others?sessionId=@sessionId">Trend Chart</a></li>
+                                <li class=""><a href="/Report/Others2?sessionId=@sessionId">Others</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -151,31 +152,26 @@
                                 <!--<li><a href="javascript:void(0)" id="search-button"><i class="fa fa-search"></i></a></li>-->
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-
-                                <li class="dropdown">
-                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i></a>
-                                    <!--notification bell-->
-                                    <!-- <ul class="dropdown-menu dropdown-lg dropdown-content">
-                                        <li class="drop-title">Notifications<a href="#" class="drop-title-link"><i class="fa fa-angle-right"></i></a></li>
-                                        <li class="slimscroll dropdown-notifications">
-                                            <ul class="list-unstyled dropdown-oc">
-                                                <li>
-                                                    <a href="#"><span class="notification-badge bg-primary"><i class="fa fa-photo"></i></span>
-                                                        <span class="notification-info">Finished uploading photos to gallery <b>"South Africa"</b>.
-                                                            <small class="notification-date">20:00</small>
-                                                        </span></a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>-->
-                                </li>
+                                <!--<li class="dropdown">
+          notification bell   <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i></a>-->
+                                <!-- <ul class="dropdown-menu dropdown-lg dropdown-content">
+                <li class="drop-title">Notifications<a href="#" class="drop-title-link"><i class="fa fa-angle-right"></i></a></li>
+                <li class="slimscroll dropdown-notifications">
+                    <ul class="list-unstyled dropdown-oc">
+                        <li>
+                            <a href="#"><span class="notification-badge bg-primary"><i class="fa fa-photo"></i></span>
+                                <span class="notification-info">Finished uploading photos to gallery <b>"South Africa"</b>.
+                                    <small class="notification-date">20:00</small>
+                                </span></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>-->
                                 <li class="dropdown user-dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://via.placeholder.com/36x36" alt="" class="img-circle"></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Hello, User!</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href=@Url.Action( "Logout", "Logout")>Log Out</a></li>
-                                    </ul>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Hi, @employeeName!  </b> </a>
+                                <li><a href=@Url.Action( "Logout", "Logout", new { sessionId })>Log Out        <i class="fa fa-power-off"></i></a>  </li>
+
                                 </li>
                             </ul>
                         </div><!-- /.navbar-collapse -->

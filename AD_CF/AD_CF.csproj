@@ -152,6 +152,7 @@
     <Compile Include="Models\Delegation.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\ItemQuantity.cs" />
     <Compile Include="Models\obsolete\Inventory.cs" />
     <Compile Include="Models\PendingItemsModel.cs" />
     <Compile Include="Models\ProductCatalogue.cs" />
@@ -889,6 +890,7 @@
     <Content Include="Views\DH\obsolete\Editdelegation.cshtml" />
     <Content Include="Views\DH\Editdelegation.cshtml" />
     <Content Include="Views\Collection\DHcollectionpoint.cshtml" />
+    <Content Include="Views\Report\Others2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
