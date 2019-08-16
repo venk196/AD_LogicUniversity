@@ -1,0 +1,513 @@
+﻿
+@using AD_CF.Models
+@{
+    List<ProductCatalogue> list = (List<ProductCatalogue>)ViewData["Catalogue"];    
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Responsive Admin Dashboard Template">
+        <meta name="keywords" content="admin,dashboard">
+        <meta name="author" content="stacks">
+        <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        
+        <!-- Title -->
+        <title>Logic University - Stationery System</title>
+
+        <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="~/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="~/assets/plugins/icomoon/style.css" rel="stylesheet">
+        <link href="~/assets/plugins/uniform/css/default.css" rel="stylesheet"/>
+        <link href="~/assets/plugins/switchery/switchery.min.css" rel="stylesheet"/>
+      
+        <!-- Theme Styles -->
+        <link href="~/assets/css/space.min.css" rel="stylesheet">
+        <link href="~/assets/css/custom.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    
+    <body class="page-sidebar-fixed page-header-fixed">
+        
+        <!-- Page Container -->
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            <div class="page-sidebar">
+                <a class="logo-box" href="">
+                    Logic<span>SSIS</span>
+                 
+                    <i class="icon-close" id="sidebar-toggle-button-close"></i>
+                </a>
+                <div class="page-sidebar-inner">
+                    <div class="page-sidebar-menu">
+                        <ul class="accordion-menu">
+                            <li>
+                                <a href="">
+                                    <i class="menu-icon fa fa-home"></i><span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <i class="menu-icon fa fa-archive"></i><span>Inventory</span><i class="accordion-icon fa fa-angle-left"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="">Retrieval</a></li>
+                                    <li><a href="">Disbursement</a></li>
+                                    <li><a href="">Stocklist</a></li>
+                              
+                                </ul>
+                            </li>
+                            
+                            <li>
+                            <a href="">
+                            <i class="menu-icon fa fa-shopping-cart"></i><span>Purchase Order</span>
+                            </a>
+                            </li>
+                            <li class="">
+                                <a href="javascript:void(0);">
+                                    <i class="menu-icon fa fa-list-alt"></i><span>Stock Adjustment</span><i class="accordion-icon fa fa-angle-left"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="layout-blank.html">Issue Voucher</a></li>
+                                    <li><a href="layout-boxed.html">Approve Voucher</a></li>
+                                </ul>
+                            </li>
+                            <li class="active-page">
+                                <a href="javascript:void(0);">
+                                    <i class="menu-icon fa fa-list"></i><span>Master Table</span><i class="accordion-icon fa fa-angle-left"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="~/master/SupplierList">Supplier List</a></li>
+                                    <li class=""><a href="~/master/DeptList">Department List</a></li>
+                                    <li class="active-page"><a href="~/master/Catalogue">Catalogue</a></li>
+                            </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <i class="menu-icon fa fa-line-chart"></i><span>Report</span><i class="accordion-icon fa fa-angle-left"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="">Trend Chart</a></li>
+                                    <li><a href="">Others</a></li>
+                                </ul>
+                            </li>
+                          </ul>
+                    </div>
+                </div>
+            </div><!-- /Page Sidebar -->
+            
+            <!-- Page Content -->
+            <div class="page-content">            
+                <!-- Page Header -->
+                <div class="page-header">
+                    <!--<div class="search-form">
+                        <form action="#" method="GET">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control search-input" placeholder="Type something...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" id="close-search" type="button"><i class="icon-close"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>-->
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <div class="logo-sm">
+                                    <a href="javascript:void(0)" id="sidebar-toggle-button"><i class="fa fa-bars"></i></a>
+                                    <a class="logo-box" href=""><span>LogicSSIS</span></a>
+                                </div>
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <i class="fa fa-angle-down"></i>
+                                </button>
+                            </div>
+                        
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                        
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="javascript:void(0)" id="collapsed-sidebar-toggle-button"><i class="fa fa-bars"></i></a></li>
+                                    <li><a href="javascript:void(0)" id="toggle-fullscreen"><i class="fa fa-expand"></i></a></li>
+                                    <!--<li><a href="javascript:void(0)" id="search-button"><i class="fa fa-search"></i></a></li>-->
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+   
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i></a>
+                                      <!--notification bell--> <!-- <ul class="dropdown-menu dropdown-lg dropdown-content">
+                                            <li class="drop-title">Notifications<a href="#" class="drop-title-link"><i class="fa fa-angle-right"></i></a></li>
+                                            <li class="slimscroll dropdown-notifications">
+                                                <ul class="list-unstyled dropdown-oc">
+                                                    <li>
+                                                        <a href="#"><span class="notification-badge bg-primary"><i class="fa fa-photo"></i></span>
+                                                            <span class="notification-info">Finished uploading photos to gallery <b>"South Africa"</b>.
+                                                                <small class="notification-date">20:00</small>
+                                                            </span></a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>-->
+                                    </li>
+                                    <li class="dropdown user-dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://via.placeholder.com/36x36" alt="" class="img-circle"></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Hello, User!</a></li>
+                                            <li role="separator" class="divider"></li>        
+                                            <li><a href="#">Log Out</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div><!-- /.navbar-collapse -->
+                        </div><!-- /.container-fluid -->
+                    </nav>
+                </div><!-- /Page Header -->
+                <!-- Page Inner -->
+         <div class="page-inner">
+                                     <div class="page-title">
+                                         <h3 class="breadcrumb-header">Catalogue</h3>
+                                     </div>
+                                     <div id="main-wrapper">
+                                         <div class="row">
+                                             <div class="col-md-12">
+                                                 <div class="panel panel-white">
+                                                     <div class="panel-heading clearfix">
+                                                         <h4 class="panel-title">
+                                                         </h4>
+                                                     </div>
+                                                     <div class="panel-body">
+                                                         <div class="table-responsive">
+                                                             <table id="tblcat" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="display:none;">Id</th>
+                                                    <th>Item No.</th>
+                                                    <th>Category</th>
+                                                    <th>Description</th>
+                                                    <th>Reorder Level</th>
+                                                    <th>Reorder Qty</th>
+                                                    <th>UOM</th>
+
+                                                    <th>Action</th>
+                                                    <!--<th>Supplier #1</th>
+    <th>Tender Price</th>
+    <th>Supplier #2</th>
+    <th>Tender Price</th>
+    <th>Supplier #3</th>
+    <th>Tender Price</th>-->
+
+                                                </tr>
+                                            </thead><!--/thead-->
+                                            <tbody>
+                                                @foreach (var d in list)
+                                                {
+                                                <tr>
+                                                    <td class="id" style="display:none;">
+                                                        <span>@d.id</span>
+                                                        <input type="hidden" value="@d.id" style="display:none" />
+                                                    </td>
+                                                    <td class="itemNumber">
+                                                        <span>@d.itemNumber</span>
+                                                        <input type="text" value="@d.itemNumber" style="display:none; width:80px" />
+                                                    </td>
+                                                    <td class="category">
+                                                        <span>@d.category</span>
+                                                        <input type="text" value="@d.category" style="display:none;width:80px" />
+                                                    </td>
+                                                    <td class="description">
+                                                        <span>@d.description</span>
+                                                        <input type="text" value="@d.description" style="display:none; width:80px" />
+                                                    </td>
+                                                    <td class="reorderlevel">
+                                                        <span>@d.reorderlevel</span>
+                                                        <input type="text" value="@d.reorderlevel" style="display:none; width:80px" />
+                                                    </td>
+                                                    <td class="reorderquantity">
+                                                        <span>@d.reorderquantity</span>
+                                                        <input type="text" value="@d.reorderquantity" style="display:none; width:80px" />
+                                                    </td>
+                                                    <td class="unitofmeasure">
+                                                        <span>@d.unitofmeasure</span>
+                                                        <input type="text" value="@d.unitofmeasure" style="display:none; width:80px" />
+                                                    </td>
+                                 
+                                                    <td>
+                                                        <a class="Edit" href="javascript:;">Edit</a>
+                                                        <a class="Update" href="javascript:;" style="display:none">Update</a>
+                                                        <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
+                                                         <a class="Delete" href="javascript:;">Delete</a>
+                                                    </td>
+                                                </tr>
+                                                }
+                                            </tbody><!--/tbody-->
+                                        </table><!--/.table-->
+                                 <div class="">
+                                               <h2>Add New Item</h2>
+                                           </div><!--/.box-head-->
+   
+   
+                                           <table id="" class="table">
+                                               <thead>
+                                                   <tr>
+                                                       <th>Item No.</th>
+                                                       <th>Category</th>
+                                                       <th>Description</th>
+                                                       <th>Reorder Level</th>
+                                                       <th>Reorder Qty</th>
+                                                       <th>UOM</th>
+                                                       <th>Action</th>
+                                                   </tr>
+                                               </thead><!--/thead-->
+                                               <tr>
+                                                   <td style="width: 10px">
+                                                       <input type="text" id="txtitemNumber" style="width:50px" />
+                                                   </td>
+                                                   <td style="width: 150px">
+                                                       <input type="text" id="txtcategory" style="width:100px" />
+                                                   </td>
+                                                   <td style="width: 150px">
+                                                       <input type="text" id="txtdescription" style="width:100px" />
+                                                   </td>
+                                                   <td style="width: 150px">
+                                                       <input type="text" id="txtreorderlevel" style="width:100px" />
+                                                   </td>
+                                                   <td style="width: 150px">
+                                                       <input type="text" id="txtreorderquantity" style="width:80px" />
+                                                   </td>
+                                                   <td style="width: 150px">
+                                                       <input type="text" id="txtunitofmeasure" style="width:80px" />
+                                                   </td>
+
+                                                   <td style="width: 200px">
+                                                       <input type="button" id="btnAdd" value="Add" />
+                                                   </td>
+   
+                                               </tr>
+                                           </table>
+                                                          </div>
+                                                       </div>
+                                                   </div>
+                                               </div>
+           
+                               </div><!-- Row -->
+                  </div><!-- Main Wrapper -->
+                  <div class="page-footer">
+                      <p>SA48 Team 10</p>
+                  </div>
+                  </div><!-- /Page Inner -->
+    
+                 
+              </div><!-- /Page Content -->
+          </div><!-- /Page Container -->
+          
+          
+          <!-- Javascripts -->
+          <script src="~/assets/plugins/jquery/jquery-3.1.0.min.js"></script>
+          <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+          <script src="~/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+          <script src="~/assets/plugins/uniform/js/jquery.uniform.standalone.js"></script>
+          <script src="~/assets/plugins/switchery/switchery.min.js"></script>
+    <script src="~/assets/js/space.min.js"></script>
+    
+    
+           <!--On-screen CRUD function-->
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+            <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+
+    <script type="text/javascript">
+    var newJQuery = jQuery.noConflict(true),
+        oldJQuery = jQuery;
+
+    (function ($) {
+
+        // code that needs 1.4.2 goes here
+
+    }(newJQuery));
+
+    (function ($) {
+
+        // code that needs 1.2.6 goes here
+
+ 
+                     //Remove the dummy row if data present.
+                     if ($("#tblcat tr").length > 2) {
+                         $("#tblcat tr:eq(1)").remove();
+                     } else {
+                         var row = $("#tblcat tr:last-child");
+                         row.find(".Edit").hide();
+                         row.find(".Delete").hide();
+                         row.find("span").html('&nbsp;');
+                     }
+                 });
+     
+                 function AppendRow(row, itemNumber, category, description, reorderlevel, reorderquantity, unitofmeasure, location) {
+                     
+                     //Bind itemNumber.
+                     $(".itemNumber", row).find("span").html(itemNumber);
+                     $(".itemNumber", row).find("input").val(itemNumber);
+     
+                     //Bind category.
+                     $(".category", row).find("span").html(category);
+                     $(".category", row).find("input").val(category);
+     
+                     //Bind description.
+                     $(".description", row).find("span").html(description);
+                     $(".description", row).find("input").val(description);
+     
+                     //Bind reorderlevel.
+                     $(".reorderlevel", row).find("span").html(reorderlevel);
+                     $(".reorderlevel", row).find("input").val(reorderlevel);
+     
+                     //Bind reorderquantity.
+                     $(".reorderquantity", row).find("span").html(reorderquantity);
+                     $(".reorderquantity", row).find("input").val(reorderquantity);
+     
+                     //Bind unitofmeasure.
+                     $(".unitofmeasure", row).find("span").html(unitofmeasure);
+                     $(".unitofmeasure", row).find("input").val(unitofmeasure);
+     
+                     row.find(".Edit").show();
+                     row.find(".Delete").show();
+                     $("#tblcat").append(row);
+                 };
+     
+                 //Add event handler.
+                 $("body").on("click", "#btnAdd", function () {
+                     var txtitemNumber = $("#txtitemNumber");
+                     var txtcategory = $("#txtcategory");
+                     var txtdescription = $("#txtdescription");
+                     var txtreorderlevel = $("#ttxtreorderlevelxcategory");
+                     var txtreorderquantity = $("#txtreorderquantity");
+                     var txtunitofmeasure = $("#txtunitofmeasure");
+
+                     $.ajax({
+                         type: "POST",
+                         url: "/master/InsertCatalogue",
+                         data: '{itemNumber: "' + txtitemNumber.val() + '", category: "' + txtcategory.val() + '", description: "' + txtdescription.val() + '", reorderlevel: "' + txtreorderlevel.val() + '", reorderquantity: "' + txtreorderquantity.val() + '", unitofmeasure: "' + txtunitofmeasure.val() + '"}',
+                         contentType: "application/json; charset=utf-8",
+                         dataType: "json",
+                         success: function (r) {
+                             var row = $("#tblcat tr:last-child"); 
+                             if ($("#tblcat tr:last-child span").eq(0).html() != "&nbsp;") {
+                                 row = row.clone();
+                             }
+                             AppendRow(row, r.itemNumber, r.category, r.description, r.reorderlevel, r.reorderquantity, r.unitofmeasure,);
+                             txtitemNumber.val("");
+                             txtcategory.val("");
+                             txtdescription.val("");
+                             txtreorderlevel.val("");
+                             txtreorderquantity.val("");
+                             txtunitofmeasure.val("");
+
+                         }
+                     });
+                 });
+     
+                 //Edit event handler.
+                 $("body").on("click", "#tblcat .Edit", function () {
+                     var row = $(this).closest("tr");
+                     $("td", row).each(function () {
+                         if ($(this).find("input").length > 0) {
+                             $(this).find("input").show();
+                             $(this).find("span").hide();
+                         }
+                     });
+                     row.find(".Update").show();
+                     row.find(".Cancel").show();
+                     row.find(".Delete").hide();
+                     $(this).hide();
+                 });
+     
+                 //Update event handler.
+                 $("body").on("click", "#tblcat .Update", function () {
+                     var row = $(this).closest("tr");
+                     $("td", row).each(function () {
+                         if ($(this).find("input").length > 0) {
+                             var span = $(this).find("span");
+                             var input = $(this).find("input");
+                             span.html(input.val());
+                             span.show();
+                             input.hide();
+                         }
+                     });
+                     row.find(".Edit").show();
+                     row.find(".Delete").show();
+                     row.find(".Cancel").hide();
+                     $(this).hide();
+     
+                     var pcat = {};
+                     pcat.id = row.find(".id").find("span").html();
+                     pcat.itemNumber = row.find(".itemNumber").find("span").html();
+                     pcat.category = row.find(".category").find("span").html();
+                     pcat.description = row.find(".description").find("span").html();
+                     pcat.reorderlevel = row.find(".reorderlevel").find("span").html();
+                     pcat.reorderquantity = row.find(".reorderquantity").find("span").html();
+                     pcat.unitofmeasure = row.find(".unitofmeasure").find("span").html();
+                       $.ajax({
+                         type: "POST",
+                         url: "/master/UpdateCatalogue",
+                         data: '{pcat:' + JSON.stringify(pcat) + '}',
+                         contentType: "application/json; charset=utf-8",
+                         dataType: "json"
+                     });
+                 });
+     
+                 //Cancel event handler.
+                 $("body").on("click", "#tblcat .Cancel", function () {
+                     var row = $(this).closest("tr");
+                     $("td", row).each(function () {
+                         if ($(this).find("input").length > 0) {
+                             var span = $(this).find("span");
+                             var input = $(this).find("input");
+                             input.val(span.html());
+                             span.show();
+                             input.hide();
+                         }
+                     });
+                     row.find(".Edit").show();
+                     row.find(".Delete").show();
+                     row.find(".Update").hide();
+                     $(this).hide();
+                 });
+     
+     
+     
+                 //Delete event handler.
+                 $("body").on("click", "#tblcat .Delete", function () {
+                     if (confirm("Do you want to delete this row?")) {
+                         var row = $(this).closest("tr");
+                         var id = row.find("span").html();
+                         $.ajax({
+                             type: "POST",
+                             url: "/master/DeleteCatalogue",
+                             data: '{id: ' + id + '}',
+                             contentType: "application/json; charset=utf-8",
+                             dataType: "json",
+                             success: function (response) {
+                                 if ($("#tblcat tr").length > 2) {
+                                     row.remove();
+                                 } else {
+                                     row.find(".Edit").hide();
+                                     row.find(".Delete").hide();
+                                     row.find("span").html('&nbsp;');
+                                 }
+                             }
+                         });
+                     }
+
+    }(oldJQuery));
+</script>
+    
+      </body>
+  </html>

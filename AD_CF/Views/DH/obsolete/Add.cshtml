@@ -1,0 +1,121 @@
+﻿@using AD_CF.Models
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var d = (Delegation)ViewData["d"];
+    List<Employee> emps = (List<Employee>)ViewData["emps"];
+    string sessionid = (string)ViewData["sessionid"];
+}
+
+<h2>DELEGATION PAGE</h2>
+<h3>@TempData["tips"]</h3>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+<body>
+
+
+    @using (Html.BeginForm("CreateDelegation", "DH", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>For Managers Only</h4>
+        <hr />
+
+        <table class="form-group">
+            <tr>
+                <th>Employee ID</th>
+                <th>Employee Name</th>
+            </tr>
+            @foreach (var emp in emps)
+            {
+                <tr>
+                    <td>@emp.id</td>
+                    <td>@emp.empName</td>
+                </tr>
+            }
+
+        </table>
+
+        <table class="form-group">
+            <tr>
+                <td colspan="80">
+                    Delegate To:
+                </td>
+                <td colspan="80" , align="left">
+                    <select id="employeeName" name="employeeName">
+                        @foreach (var emp in emps)
+                        {
+                            <option value="@emp.empName">@emp.empName</option>
+
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="80">
+                    Start Date:
+                </td>
+                <td colspan="80" , align="left">
+                    @Html.TextBoxFor(x => d.startDate)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="80">
+                    End Date:
+                </td>
+                <td colspan="80" , align="left">
+                    @Html.TextBoxFor(x => d.endDate)
+                    
+                </td>
+            </tr>
+            <tr>
+                <td colspan="160" , align="right">
+                    <input type="submit" value="Confirm" class="btn btn-default" />
+                    <input type="hidden" name="sessionid" id="sessionid" value="@sessionid" />
+                </td>
+            </tr>
+        </table>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => d.delegateToName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => d.delegateToName, new { htmlAttributes = new { @class = "form-control"  } })
+                @Html.ValidationMessageFor(model => d.delegateToName, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => d.startDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => d.startDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => d.endDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => d.endDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => d.endDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => d.endDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>*@
+    </div>
+    }
+
+
+
+</body>
+</html>

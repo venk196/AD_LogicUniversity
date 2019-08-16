@@ -1,0 +1,120 @@
+﻿
+@model AD_CF.Models.User
+@{
+    Layout = null;
+    string msg = (string)ViewData["msg"];
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <title>Logic University - Stationery Store Inventory System</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css" integrity="sha256-wT6CFc7EKRuf7uyVfi+MQNHUzojuHN2pSw0YWFt2K5E=" crossorigin="anonymous" />
+
+    <style>
+    body > .grid {
+        height: 100%;
+    }
+    .image {
+        margin-top: -80px;
+    }
+    .column {
+        max-width: 450px;
+    }</style>
+    
+    <script>
+      $(document)
+        .ready(function() {
+          $('.ui.form')
+            .form({
+              fields: {
+                userName: {
+                  identifier  : 'userName',
+                  rules: [
+                    {
+                      type   : 'empty',
+                      prompt : 'Please enter your e-mail'
+                    },
+                    {
+                      type   : 'text',
+                      prompt : 'Please enter a valid e-mail'
+                    }
+                  ]
+                },
+                password: {
+                  identifier  : 'password',
+                  rules: [
+                    {
+                      type   : 'empty',
+                      prompt : 'Please enter your password'
+                    },
+                    {
+                      type   : 'length[6]',
+                      prompt : 'Your password must be at least 6 characters'
+                    }
+                  ]
+                }
+              }
+            })
+          ;
+        })
+      ;
+    </script>
+</head>
+<body>
+<div class="ui middle aligned center aligned grid">
+    
+    
+    <div class="column">
+        <img src="~/assets/images/2.png" align= "middle" height="220" width="auto">
+        <!--<h2 class="ui image header">
+            Log-in to your account
+        </h2>-->
+        <p></p><p></p><p></p>
+        <form action="" method="get" class="ui large form">
+            @if (msg != null)
+                {
+                    <div>
+                        <p style="color:red">@msg</p></div>
+                }
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post, new {@class = "form-horizontal"}))
+            {
+                <div class="ui stacked secondary  segment">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            @Html.TextBoxFor(x => x.userName, new {@class = "form-control", placeholder = "Username"})
+
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            @Html.TextBoxFor(x => x.password, new {@class = "form-control", placeholder = "Password", /*@type = "password" */})
+
+                        </div>
+                    </div>
+                    <button class="ui fluid  blue submit button" type="submit">Login</button>
+                    <br>
+                    <button class="ui fluid  blue submit button" type="reset">Clear</button>
+                </div>
+                <div class="ui error message"></div>
+            }
+        </form>
+
+        <!--<div class="ui message">        
+        </div>-->
+    </div>
+</div>
+
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.8/semantic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+-->
+
+
+</body>
+</html>

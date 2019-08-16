@@ -1,0 +1,288 @@
+﻿@using AD_CF.Models
+@{
+    ViewBag.Title = "DHdelegation";
+    var d = (Delegation)ViewData["d"];
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="~/assets/js/jquery-1.8.0.min.js"></script>
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="~/assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+    <!-- META DATA -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- TITLE OF SITE -->
+    <title>DashLoon</title>
+
+    <!-- favicon -->
+    <!--<link rel="shortcat icon" href="/favicon.ico" type="image/x-icon">-->
+    <!--font-awesome.min.css-->
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+
+    <!--linear icon css-->
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+    <!--chartist.min.css-->
+    <link rel="stylesheet" href="~/assets/chartist/css/chartist.min.css">
+
+    <!--bootstrap.min.css-->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+
+    <!--style.css-->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+
+    <!--responsive.css-->
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!-- wrapper -->
+    <div id="wrapper">
+
+        <!-- navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="brand">
+                <a href="index.html">
+                    Logic<span>SSIS</span>
+                </a>
+            </div><!--/.brand -->
+            <div class="container-fluid">
+                <div class="navbar-btn">
+                    <button type="button" class="btn-toggle-fullwidth">
+                        <i class="lnr lnr-arrow-left-circle"></i>
+                    </button>
+                </div><!--/.navbar-btn -->
+
+
+                <div class="navbar-left"><img src="~/Images/3.png" class="pic" /> </div>
+                <div class="navbar-left"><img src="~/Images/3.png" class="pic" /> </div>
+
+
+                <div class="navbar-menu">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                <i data-feather="bell"></i>
+                                <span class="badge badge-bg-1">2</span>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                <h4>log out</h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!--/.container-fluid -->
+
+        </nav><!--/nav -->
+        <!-- END NAVBAR -->
+        <!-- LEFT SIDEBAR -->
+
+        <div id="sidebar-nav" class="sidebar">
+            <div class="s">
+                <nav>
+                    <ul class="nav">
+                        <li>
+                            <a href="http://localhost:53359/Home/DHeadmain">
+                                <i data-feather="home"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="http://localhost:53359/Home/DHCreateNew">
+                                <i data-feather="package"></i> <span>Create New</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="http://localhost:53359/Home/DHapprove">
+                                <i data-feather="file-text"></i> <span>Approve / Reject</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="http://localhost:53359/Home/DHViewHistory">
+                                <i data-feather="grid"></i> <span>View History</span>
+                            </a>
+                        </li>
+
+                        <li class="active">
+                            <a href="http://localhost:53359/Home/DHdelegation">
+                                <i data-feather="map"></i> <span>Delegation</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="http://localhost:53359/Home/DHcollectionpoint">
+                                <i data-feather="bar-chart"></i> <span>Collection Point</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- END LEFT SIDEBAR -->
+        <div class="tlinks">Collect from <a href="http://www.cssmoban.com/"></a></div>
+
+        <!-- MAIN -->
+        <div class="main">
+
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="box">
+                                <div class="box-head">
+                                    <div class="container">
+                                        @using (Html.BeginForm("CreateDelegation", "DH", FormMethod.Post))
+                                        {<fieldset>
+                                                <legend>Summary of Stationery Requisition (Pending Fulfilment)</legend>
+                                                <div class="form-group">
+                                                    <label for="dtp_input1" class="col-md-2 control-label">Date Picking</label>
+                                                    <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
+                                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                    </div>
+                                                    @Html.HiddenFor(model => d.startDate, new { @id = "dtp_input1", @name = "startDate" })
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="dtp_input2" class="col-md-2 control-label">Date Picking</label>
+                                                    <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                    </div>
+                                                    @Html.HiddenFor(model => d.endDate, new { @id = "dtp_input2", @name = "endDate" })
+                                                </div>
+                                            </fieldset>
+                                            <input type="submit" value="Save" class="btn btn-default" />
+                                        }
+                                    </div>
+
+                                </div><!--/.box-head-->
+                            </div><!--/.box-->
+                        </div><!--/.col-->
+                    </div><!--/.row-->
+                </div><!--/.container-fluid-->
+
+            </div><!--/.main-content-->
+
+        </div>
+        <!-- END MAIN -->
+
+        <div class="clearfix"></div>
+
+        <footer>
+            <div class="container-fluid">
+                <p>while star</p>
+            </div>
+
+        </footer>
+
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myDate").value;
+            document.getElementById("demo").innerHTML = x;
+        }
+    </script>
+    <script type="text/javascript" src="~/assets/js/jquery-1.8.0.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+
+    <script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1,
+
+        });
+        $('.form_date').datetimepicker({
+            language: 'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+        $('.form_time').datetimepicker({
+            language: 'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 1,
+            minView: 0,
+            maxView: 1,
+            forceParse: 0
+        });
+    </script>
+    <!-- END WRAPPER -->
+    <!--jquery-1.12.4.min.js-->
+
+    <script src="~/assets/js/jquery.min.js"></script>
+
+    <!--chartist.min.js-->
+    <script src="~/assets/chartist/js/chartist.min.js"></script>
+    <script src="~/assets/chartist/js/chartist-tooltip-plugin.js"></script>
+    <script src="~/assets/chartist/js/chartist-custom.js"></script>
+
+    <!--bootstrap.min.js-->
+    <script src="~/assets/js/bootstrap.min.js"></script>
+
+    <!--jquery.slimscroll.min.js-->
+    <script src="~/assets/js/jquery.slimscroll.min.js"></script>
+
+    <!--feather.min.js-->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <!-- DataMaps Plugin Js -->
+    <script src="~/assets/js/d3.min.js"></script>
+    <script src="~/assets/js/topojson.js"></script>
+    <script src="~/assets/js/datamaps.world.min.js"></script>
+
+    <!--fontawesome-all.min.js-->
+    <script src="~/assets/js/fontawesome-all.min.js"></script>
+
+    <!--Custom JS-->
+    <script src="~/assets/js/custom.js"></script>
+
+    <!--DatePicker Js-->
+    <script src="~/assets/js/WdatePicker.js"></script>
+    <script src="~/assets/js/calendar.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+

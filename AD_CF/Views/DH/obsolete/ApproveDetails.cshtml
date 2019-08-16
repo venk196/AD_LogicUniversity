@@ -1,0 +1,121 @@
+﻿@model IEnumerable<AD_CF.Models.ProductReq>
+@{
+    ViewBag.Title = "ApproveDetails";
+    Layout = null;
+    int reqformnumber = (int)ViewData["reqformnumber"];
+}
+
+
+
+
+<head>
+    <!-- META DATA -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- TITLE OF SITE -->
+    <title>DashLoon</title>
+
+    <!-- favicon -->
+    <!--<link rel="shortcat icon" href="/favicon.ico" type="image/x-icon">-->
+    <!--font-awesome.min.css-->
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+
+    <!--linear icon css-->
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+    <!--chartist.min.css-->
+    <link rel="stylesheet" href="~/assets/chartist/css/chartist.min.css">
+
+    <!--bootstrap.min.css-->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+
+    <!--style.css-->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+
+    <!--responsive.css-->
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- wrapper -->
+    <div id="wrapper">
+
+        <!-- navbar -->
+     
+
+        <!-- END LEFT SIDEBAR -->
+        <div class="tlinks">Collect from <a href="http://www.cssmoban.com/"></a></div>
+
+        <!-- MAIN -->
+        <div class="main">
+
+            <!-- MAIN CONTENT -->
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="box">
+                                <div class="box-head">
+                                    <h2>Requisition Form Detail</h2>
+                                </div><!--/.box-head-->
+                                <div class="item">
+                                    <div class="item-responsive ">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/N</th>
+                                                    <th>Item</th>
+                                                    <th>Quantity</th>
+                                                </tr>
+                                            </thead><!--/thead-->
+                                            <tbody>
+                                                @foreach (var req in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@req.productitemnumber</td>
+                                                        <td>@req.productDesc</td>
+                                                        <td>@req.quantity</td>
+                                                    </tr>
+                                                }                                               
+                                            </tbody><!--/tbody-->
+                                        </table><!--/.table-->
+                                    </div><!--/.table-responsive-->
+                                </div><!--/.item-->
+                            </div><!--/.box-->
+                        </div><!--/.col-->
+                    </div><!--/.row-->                    
+                </div><!--/.container-fluid-->
+            </div><!--/.main-content-->
+        </div>
+        <!-- END MAIN -->
+
+        <div class="clearfix"></div>
+
+
+    </div>
+    <!-- END WRAPPER -->
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+

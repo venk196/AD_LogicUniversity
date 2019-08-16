@@ -1,0 +1,278 @@
+﻿
+@{
+    ViewBag.Title = "DHdelegation";
+}
+
+
+
+<html ng-app="app" lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="~/assets/css/wui.min.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/datastyle.css">
+
+    <script type="text/javascript" src="~/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/angular.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/wui-date.js" charset="utf-8"></script>
+    <!-- META DATA -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- TITLE OF SITE -->
+    <title>DashLoon</title>
+
+    <!-- favicon -->
+    <!--<link rel="shortcat icon" href="/favicon.ico" type="image/x-icon">-->
+    <!--font-awesome.min.css-->
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+
+    <!--linear icon css-->
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+    <!--chartist.min.css-->
+    <link rel="stylesheet" href="~/assets/chartist/css/chartist.min.css">
+
+    <!--bootstrap.min.css-->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+
+    <!--style.css-->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+
+    <!--responsive.css-->
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- wrapper -->
+    <div id="wrapper">
+
+        <!-- navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="brand">
+                <a href="index.html">
+                    Logic<span>SSIS</span>
+                </a>
+            </div><!--/.brand -->
+            <div class="container-fluid">
+                <div class="navbar-btn">
+                    <button type="button" class="btn-toggle-fullwidth">
+                        <i class="lnr lnr-arrow-left-circle"></i>
+                    </button>
+                </div><!--/.navbar-btn -->
+                <!--<form class="navbar-form navbar-left">
+                <div class="search-group">
+                    <button type="button"><i data-feather="search"></i></button>
+                    <input type="text" value="" placeholder="Search..">
+                </div><!--/.search-group -->
+
+                <div class="navbar-menu">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                <i data-feather="bell"></i>
+                                <span class="badge badge-bg-1">2</span>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                <h4>log out</h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!--/.container-fluid -->
+
+        </nav><!--/nav -->
+        <!-- END NAVBAR -->
+        <!-- LEFT SIDEBAR -->
+
+        <div id="sidebar-nav" class="sidebar">
+            <div class="s">
+                <nav>
+                    <ul class="nav">
+                        <li>
+                            <a href="http://localhost:61547/DH/DHeadmain">
+                                <i data-feather="home"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="http://localhost:61547/DH/DHCreateNew">
+                                <i data-feather="package"></i> <span>Create New</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="http://localhost:61547/DH/DHapprove">
+                                <i data-feather="file-text"></i> <span>Approve / Reject</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="http://localhost:61547/DH/DHViewHistory">
+                                <i data-feather="grid"></i> <span>View History</span>
+                            </a>
+                        </li>
+
+                        <li class="active">
+                            <a href="http://localhost:61547/DH/DHdelegation">
+                                <i data-feather="map"></i> <span>Delegation</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="http://localhost:61547/DH/DHcollectionpoint">
+                                <i data-feather="bar-chart"></i> <span>Collection Point</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+        <!-- END LEFT SIDEBAR -->
+        <div class="tlinks">Collect from <a href="http://www.cssmoban.com/"></a></div>
+
+        <!-- MAIN -->
+        <div class="main">
+
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="box">
+                                <div class="box-head">
+                                    <h2>Summary of Stationery Requisition (Pending Fulfilment)</h2>
+                                </div><!--/.box-head-->
+                                <div class="item">
+                                    <div class="item-responsive ">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>REQUISITION NO.</th>
+                                                    <th>REQUISITION DATE</th>
+                                                </tr>
+                                            </thead><!--/thead-->
+                                            <tbody>
+                                                <tr>
+                                                    <td>Delegate To</td>
+                                                    <td>
+                                                        <select>
+                                                            <option value="volvo">Lai Siqi</option>
+                                                            <option value="saab">Annie</option>
+                                                            <option value="opel">Ge Zhongbo</option>
+                                                            <option value="audi">DiWei</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr style="width:100px;">
+                                                    <td>START DATE</td>
+                                                    <td>
+                                                        <div class="wui-content">
+                                                            <div class="wui-area">
+                                                                <wui-date format="yyyy-mm-dd"
+                                                                          placeholder="please choose a date"
+                                                                          id="date1"
+                                                                          btns="{'ok':'Confirm','now':'Current time'}"
+                                                                          ng-model="date1">
+                                                                </wui-date>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr style="align-content:center">
+                                                    <td>END DATE</td>
+                                                    <td>
+                                                        <div class="wui-content">
+                                                            <div class="wui-area">
+                                                                <wui-date format="yyyy-mm-dd"
+                                                                          placeholder="please choose a date"
+                                                                          id="date2"
+                                                                          btns="{'ok':'Confirm','now':'Current time'}"
+                                                                          ng-model="date2">
+                                                                </wui-date>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody><!--/tbody-->
+                                        </table><!--/.table-->
+                                    </div><!--/.table-responsive-->
+                                </div><!--/.item-->
+                            </div><!--/.box-->
+                        </div><!--/.col-->
+                    </div><!--/.row-->
+                    <a href="http://localhost:61547/DH/Existdelegation"> <input type="button" value="confirm" class="navbar-right"></a>
+                </div><!--/.container-fluid-->
+
+            </div><!--/.main-content-->
+
+        </div>
+        <!-- END MAIN -->
+
+        <div class="clearfix"></div>
+
+        <footer>
+            <div class="container-fluid">
+                <p>while star</p>
+            </div>
+
+        </footer>
+
+    </div>
+    <!-- END WRAPPER -->
+    <!--jquery-1.12.4.min.js-->
+    <script type="text/javascript">
+        var app = angular.module('app', ["wui.date"]);
+    </script>
+    <script src="~/assets/js/jquery.min.js"></script>
+
+    <!--chartist.min.js-->
+    <script src="~/assets/chartist/js/chartist.min.js"></script>
+    <script src="~/assets/chartist/js/chartist-tooltip-plugin.js"></script>
+    <script src="~/assets/chartist/js/chartist-custom.js"></script>
+
+    <!--bootstrap.min.js-->
+    <script src="~/assets/js/bootstrap.min.js"></script>
+
+    <!--jquery.slimscroll.min.js-->
+    <script src="~/assets/js/jquery.slimscroll.min.js"></script>
+
+    <!--feather.min.js-->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <!-- DataMaps Plugin Js -->
+    <script src="~/assets/js/d3.min.js"></script>
+    <script src="~/assets/js/topojson.js"></script>
+    <script src="~/assets/js/datamaps.world.min.js"></script>
+
+    <!--fontawesome-all.min.js-->
+    <script src="~/assets/js/fontawesome-all.min.js"></script>
+
+    <!--Custom JS-->
+    <script src="~/assets/js/custom.js"></script>
+
+    <!--DatePicker Js-->
+    <script src="~/assets/js/WdatePicker.js"></script>
+    <script src="~/assets/js/calendar.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+

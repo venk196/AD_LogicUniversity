@@ -1,0 +1,273 @@
+﻿@using System.Net.Mail
+@using AD_CF.Models
+@model AD_CF.Models.StockMovement
+
+
+@{
+    ViewBag.Title = "LogicSSIS - Stocklist";
+    Layout = null;
+    string itemNumber = (string) ViewData["itemNumber"];
+    string description = (string) ViewData["itemDesc"];
+    string sessionId = (string)ViewData["sessionId"];
+    string uom = (string)ViewData["uom"];
+    string msg = (string)ViewData["msg"];
+    string employeeName = (string) ViewData["staffname"];
+    List<StockMovement> stockmovt = (List<StockMovement>) ViewData["smt"];
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive Admin Dashboard Template">
+    <meta name="keywords" content="admin,dashboard">
+    <meta name="author" content="stacks">
+    <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title -->
+    <title>@ViewBag.Title</title>
+
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/icomoon/style.css" rel="stylesheet">
+    <link href="~/assets/plugins/uniform/css/default.css" rel="stylesheet" />
+    <link href="~/assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
+
+    <!-- Theme Styles -->
+    <link href="~/assets/css/space.min.css" rel="stylesheet">
+    <link href="~/assets/css/custom.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="page-sidebar-fixed page-header-fixed">
+
+    <!-- Page Container -->
+    <div class="page-container">
+        <!-- Page Sidebar -->
+        <div class="page-sidebar">
+            <a class="logo-box" href="">
+              <img src="~/assets/images/LogoL.jpeg" height="40" width="40"/> <span style="color:#737373; font-family: Arial; font-size: large; text-transform:none">LogicSSIS</span>
+                <i class="icon-close" id="sidebar-toggle-button-close"></i>
+            </a>
+            <div class="page-sidebar-inner">
+                <div class="page-sidebar-menu">
+                    <ul class="accordion-menu">
+                        <li>
+                            <a href="~/Dashboard/DBStoreClerk?sessionId=@sessionId">
+                                <i class="menu-icon fa fa-home"></i><span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="active-page">
+                            <a href="javascript:void(0);">
+                                <i class="menu-icon fa fa-archive"></i><span>Inventory</span><i class="accordion-icon fa fa-angle-left"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class=""><a href="~/Store/Requisitions?sessionId=@sessionId">Retrieval</a></li>
+                                <li><a href="~/Store/Disbursement?sessionId=@sessionId">Disbursement</a></li>
+                                <li class="active-page"><a href="~/Store/StockList?sessionId=@sessionId">Inventory Stock</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="~/Purchase/CreatePurchase?sessionId=@sessionId">
+                                <i class="menu-icon fa fa-shopping-cart"></i><span>Purchase Order</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="javascript:void(0);">
+                                <i class="menu-icon fa fa-list-alt"></i><span>Stock Adjustment</span><i class="accordion-icon fa fa-angle-left"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="~/StockAdjm/IssueVoucher?sessionId=@sessionId">Issue Voucher</a></li>
+                                <li class=""><a href="~/StockAdjm/VoucherHistoryClerk?sessionId=@sessionId">View Voucher History</a></li>
+                            </ul>
+                        </li>
+                        <li class="">
+                            <a href="javascript:void(0);">
+                                <i class="menu-icon fa fa-list"></i><span>Master Table</span><i class="accordion-icon fa fa-angle-left"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="~/master/SupplierList?sessionId=@sessionId">Supplier List</a></li>
+                                <li class=""><a href="~/master/DeptList?sessionId=@sessionId">Department List</a></li>
+                                <li><a href="~/master/Catalogue?sessionId=@sessionId">Catalogue</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <i class="menu-icon fa fa-line-chart"></i><span>Report</span><i class="accordion-icon fa fa-angle-left"></i>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="~/Report/Trend">Trend Chart</a></li>
+                                <li><a href="~/Report/Others">Others</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- /Page Sidebar -->
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <!--<div class="search-form">
+                    <form action="#" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control search-input" placeholder="Type something...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" id="close-search" type="button"><i class="icon-close"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                </div>-->
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <div class="logo-sm">
+                                <a href="javascript:void(0)" id="sidebar-toggle-button"><i class="fa fa-bars"></i></a>
+                                        <a class="logo-box" href=""><span style="color:#737373; font-family: Arial; font-size: large; text-transform:none">LogicSSIS</span></a>
+                            </div>
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="javascript:void(0)" id="collapsed-sidebar-toggle-button"><i class="fa fa-bars"></i></a></li>
+                                <li><a href="javascript:void(0)" id="toggle-fullscreen"><i class="fa fa-expand"></i></a></li>
+                                <!--<li><a href="javascript:void(0)" id="search-button"><i class="fa fa-search"></i></a></li>-->
+                            </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <!--<li class="dropdown">
+                                      notification bell   <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i></a>-->
+                                      <!-- <ul class="dropdown-menu dropdown-lg dropdown-content">
+                                            <li class="drop-title">Notifications<a href="#" class="drop-title-link"><i class="fa fa-angle-right"></i></a></li>
+                                            <li class="slimscroll dropdown-notifications">
+                                                <ul class="list-unstyled dropdown-oc">
+                                                    <li>
+                                                        <a href="#"><span class="notification-badge bg-primary"><i class="fa fa-photo"></i></span>
+                                                            <span class="notification-info">Finished uploading photos to gallery <b>"South Africa"</b>.
+                                                                <small class="notification-date">20:00</small>
+                                                            </span></a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>-->
+                                    <li class="dropdown user-dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Hi, @employeeName!  </b> </a>
+                                        <li><a href=@Url.Action( "Logout", "Logout", new { sessionId })>Log Out        <i class="fa fa-power-off"></i></a>  </li>
+                         
+                                    </li>
+                                </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div><!-- /Page Header -->
+            <!-- Page Inner -->
+            <div class="page-inner">
+                <div class="page-title">
+                    <h3 class="breadcrumb-header">Stock Movement</h3>
+                </div>
+                <div id="main-wrapper">
+                    <div class="row">
+                        <div class="col-md-12">
+                        <div class="panel panel-white">
+                                                           
+                                <div class="panel-heading clearfix">
+                                       <h5>Item Code: @itemNumber </h5>
+                                    <h5>Item Description: @description </h5>   
+                                    <h5>UOM: @uom</h5>
+                                    <hr/>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Movement Date</th>
+                                                <th>Description</th>
+                                                <th class="text-center">Quantity Change</th>
+                                                <th class="text-center">Balance</th>
+                                
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @{
+                                                
+                                                foreach (var smt in stockmovt)
+                                                {
+                                                    <tr>
+                                                        <td>@smt.movementDate.ToString("dd MMMM yyyy")</td>
+                                                        <td>@smt.movementDescription</td>
+                                                        <td class="text-center">@smt.movementQuantity</td>
+                                                        <td class="text-center">@smt.movementBalance</td>
+                                                    </tr>
+                                                }
+                                                
+                                            }</tbody>
+                                        </table>
+                                        @if (stockmovt.Count == 0)
+                                        {
+                                            <p>No Stock Movement.</p>
+                                        }<!--/.table-->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- Row -->
+                </div><!-- Main Wrapper -->
+                <div class="page-footer">
+                    <p>SA48 Team 10</p>
+                </div>
+            </div><!-- /Page Inner -->
+
+
+        </div><!-- /Page Content -->
+    </div><!-- /Page Container -->
+    <!-- Javascripts -->
+    <script src="~/assets/plugins/jquery/jquery-3.1.0.min.js"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/assets/plugins/uniform/js/jquery.uniform.standalone.js"></script>
+    <script src="~/assets/plugins/switchery/switchery.min.js"></script>
+    <script src="~/assets/js/space.min.js"></script>
+    <!--script functions-->
+    <script type="text/javascript">
+        function add(d) {
+            var itemNo = d.id
+            var quantitytag = itemNo + "-adjqty"
+            console.log(quantitytag)
+            var num = parseInt(document.getElementById(quantitytag).value);
+            console.log(num)
+            if (num < 1000)
+                document.getElementById(quantitytag).value = num + 1;
+        }
+        function sub(d) {
+            var itemNo = d.id
+            var quantitytag = itemNo + "-adjqty"
+            console.log(quantitytag)
+            var num = document.getElementById(quantitytag).value;
+            console.log(num)
+            document.getElementById(quantitytag).value = num - 1;
+        }
+    </script>
+
+</body>
+</html>
